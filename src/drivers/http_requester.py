@@ -15,8 +15,10 @@
 
 import requests
 
+from .interfaces.http_requester import HttpRequesterInterface
 
-class HttpRequester:
+
+class HttpRequester(HttpRequesterInterface):
     """Represents a complete HTTP request."""
 
     def __init__(self, url):

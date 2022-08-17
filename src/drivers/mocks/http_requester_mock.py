@@ -15,7 +15,7 @@
 
 #pylint: disable=line-too-long
 #pylint: disable=trailing-whitespace
-#pylint: disable=(too-many-lines
+#pylint: disable=too-many-lines
 
 
 def mock_request_from_page():
