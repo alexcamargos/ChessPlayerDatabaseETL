@@ -28,7 +28,7 @@ class ExtractorHtmlInformation:
         self.__requester = requester
         self.__collector = collector
 
-    def extract(self):
+    def extract(self) -> ExtractContract:
         try:
             html_information = self.__requester.make_request()
             collect_information = self.__collector.collect_information(html_information['content'])

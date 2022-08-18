@@ -22,8 +22,7 @@ def test_collect_information():
     http_request_response = mock_request_from_page()
 
     html_collector = HtmlCollector()
-    collect_information = html_collector.collect_information(
-        http_request_response['html'])
+    collect_information = html_collector.collect_information(http_request_response['html'])
 
     assert isinstance(collect_information, list)
     assert isinstance(collect_information[0], dict)
