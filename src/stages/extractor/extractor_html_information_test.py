@@ -15,6 +15,7 @@
 
 from datetime import date as dt
 
+from src.drivers.mocks.http_requester_mock import mock_request_from_page
 from src.drivers.http_requester import HttpRequester
 from src.drivers.html_collector import HtmlCollector
 from src.exception.extract_exception import ExtractException
@@ -25,7 +26,12 @@ from ..contracts.extract_contract import ExtractContract
 URL = 'https://www.chessgames.com/directory/A.html'
 
 
-def test_extract_html_information():
+def test_extract_html_information(requests_mock):
+    """Test extractor html information."""
+
+    response_context = mock_request_from_page()
+    requests_mock.get(URL, status_code=200, text=response_context['html'])
+
     requester = HttpRequester(URL)
     collector = HtmlCollector()
 
@@ -44,7 +50,12 @@ def test_extract_html_information():
     assert response.extraction_date == dt.today()
 
 
-def test_extract_html_information_requester_exception():
+def test_extract_html_information_requester_exception(requests_mock):
+    """Test extractor html information requester exception."""
+
+    response_context = mock_request_from_page()
+    requests_mock.get(URL, status_code=200, text=response_context['html'])
+
     requester = None
     collector = HtmlCollector()
 
@@ -56,7 +67,12 @@ def test_extract_html_information_requester_exception():
         assert isinstance(error, ExtractException)
 
 
-def test_extract_html_information_collector_exception():
+def test_extract_html_information_collector_exception(requests_mock):
+    """Test extractor html information collector exception."""
+
+    response_context = mock_request_from_page()
+    requests_mock.get(URL, status_code=200, text=response_context['html'])
+
     requester = HttpRequester(URL)
     collector = None
 
