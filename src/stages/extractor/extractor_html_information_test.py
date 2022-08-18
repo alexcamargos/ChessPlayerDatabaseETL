@@ -17,6 +17,7 @@ from datetime import date as dt
 
 from src.drivers.http_requester import HttpRequester
 from src.drivers.html_collector import HtmlCollector
+from src.exception.extract_exception import ExtractException
 
 from .extractor_html_information import ExtractorHtmlInformation
 from ..contracts.extract_contract import ExtractContract
@@ -41,3 +42,27 @@ def test_extract_html_information():
     assert 'player' in response.raw_information[0]
 
     assert response.extraction_date == dt.today()
+
+
+def test_extract_html_information_requester_exception():
+    requester = None
+    collector = HtmlCollector()
+
+    extractor = ExtractorHtmlInformation(requester=requester,
+                                         collector=collector)
+    try:
+        response = extractor.extract()  #pylint: disable=unused-variable
+    except Exception as error:  #pylint: disable=broad-except
+        assert isinstance(error, ExtractException)
+
+
+def test_extract_html_information_collector_exception():
+    requester = HttpRequester(URL)
+    collector = None
+
+    extractor = ExtractorHtmlInformation(requester=requester,
+                                         collector=collector)
+    try:
+        response = extractor.extract()  #pylint: disable=unused-variable
+    except Exception as error:  #pylint: disable=broad-except
+        assert isinstance(error, ExtractException)

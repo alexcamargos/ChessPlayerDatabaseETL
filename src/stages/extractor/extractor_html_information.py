@@ -17,6 +17,8 @@ from datetime import date as dt
 
 from src.drivers.interfaces.http_requester import HttpRequesterInterface
 from src.drivers.interfaces.html_collector import HtmlCollectorInterface
+from src.exception.extract_exception import ExtractException
+
 from ..contracts.extract_contract import ExtractContract
 
 
@@ -27,8 +29,11 @@ class ExtractorHtmlInformation:
         self.__collector = collector
 
     def extract(self):
-        html_information = self.__requester.make_request()
-        collect_information = self.__collector.collect_information(html_information['content'])
+        try:
+            html_information = self.__requester.make_request()
+            collect_information = self.__collector.collect_information(html_information['content'])
 
-        return ExtractContract(raw_information=collect_information,
-                               extraction_date=dt.today())
+            return ExtractContract(raw_information=collect_information,
+                                extraction_date=dt.today())
+        except Exception as exception:
+            raise ExtractException(exception) from exception
