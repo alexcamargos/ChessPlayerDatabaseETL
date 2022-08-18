@@ -36,7 +36,7 @@ class HtmlCollector(HtmlCollectorInterface):
         chess_players_information = []
         for chess_players in chess_players_links:
             if not '.mp3' in chess_players.get('href'):
-                href = f"https://www.chessgames.com/{chess_players.get('href')}"
+                href = f"https://www.chessgames.com{chess_players.get('href')}"
                 player_name = chess_players.contents[0].string.strip()
                 chess_players_information.append({
                     'href': href,
