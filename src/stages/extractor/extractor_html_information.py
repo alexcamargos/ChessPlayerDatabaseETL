@@ -13,8 +13,11 @@
 #  License: MIT
 #  ------------------------------------------------------------------------------
 
+from datetime import date as dt
+
 from src.drivers.interfaces.http_requester import HttpRequesterInterface
 from src.drivers.interfaces.html_collector import HtmlCollectorInterface
+from ..contracts.extract_contract import ExtractContract
 
 
 class ExtractorHtmlInformation:
@@ -27,4 +30,5 @@ class ExtractorHtmlInformation:
         html_information = self.__requester.make_request()
         collect_information = self.__collector.collect_information(html_information['content'])
 
-        return collect_information
+        return ExtractContract(raw_information=collect_information,
+                               extraction_date=dt.today())
