@@ -3,7 +3,7 @@
 #
 #  ------------------------------------------------------------------------------
 #  Name: extractor_html_information_test.py
-#  Version: 0.0.1
+#  Version: 0.0.2
 #  Summary: Chess Player Database
 #           A complete implementation of ETL process.
 #
@@ -44,8 +44,11 @@ def test_extract_html_information(requests_mock):
     assert isinstance(response.raw_information, list)
     assert isinstance(response.raw_information[0], dict)
 
+    assert 'player_name' in response.raw_information[0]
+    assert 'highest_rating' in response.raw_information[0]
+    assert 'years_covered' in response.raw_information[0]
+    assert 'number_of_games' in response.raw_information[0]
     assert 'href' in response.raw_information[0]
-    assert 'player' in response.raw_information[0]
 
     assert response.extraction_date == dt.today()
 

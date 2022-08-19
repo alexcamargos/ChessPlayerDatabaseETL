@@ -3,7 +3,7 @@
 #
 #  ------------------------------------------------------------------------------
 #  Name: html_collector.py
-#  Version: 0.0.1
+#  Version: 0.0.2
 #  Summary: Chess Player Database
 #           A complete implementation of ETL process.
 #
@@ -30,18 +30,29 @@ class HtmlCollector(HtmlCollectorInterface):
                                                        'cellspacing': "0",
                                                        'width': "100%"})
 
-        chess_players_links = []
+        chess_players_rows = []
         for chess_players_table in chess_players_tables:
-            chess_players_links.extend(chess_players_table.find_all('a'))
+            chess_players_rows.extend(chess_players_table.find_all('tr'))
+
+        chess_players_data = []
+        for row in chess_players_rows:
+            if row.find('font',  {'color': "#FFFFFF"}):
+                continue
+
+            chess_players_data.append(row.find_all('font'))
 
         chess_players_information = []
-        for chess_players in chess_players_links:
-            if not '.mp3' in chess_players.get('href'):
-                href = f"https://www.chessgames.com{chess_players.get('href')}"
-                player_name = chess_players.contents[0].string.strip()
-                chess_players_information.append({'href': href,
-                                                  'player': player_name})
-            else:
-                continue
+        for information in chess_players_data:
+            highest_rating = information[0].contents[0].strip()
+            player_name = information[1].find('a').contents[0].string.strip()
+            years_covered = information[2].contents[0].strip()
+            number_of_games = information[3].contents[0].strip()
+            href = f"https://www.chessgames.com{information[1].find('a').get('href')}"
+
+            chess_players_information.append({'player_name': player_name,
+                                            'highest_rating': highest_rating,
+                                            'years_covered': years_covered,
+                                            'number_of_games': number_of_games,
+                                            'href': href})
 
         return chess_players_information
