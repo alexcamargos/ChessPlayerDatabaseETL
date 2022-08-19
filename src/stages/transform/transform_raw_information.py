@@ -13,6 +13,8 @@
 #  License: MIT
 #  ------------------------------------------------------------------------------
 
+from src.exception.transform_exception import TransformException
+
 from ..contracts.extract_contract import ExtractContract
 from ..contracts.transform_contract import TransformContract
 
@@ -20,11 +22,14 @@ from ..contracts.transform_contract import TransformContract
 class TransformRawInformation:
 
     def transform(self, extract_contract: ExtractContract) -> TransformContract:
-        filter_information = self.__filter_information(extract_contract)
+        try:
+            filter_information = self.__filter_information(extract_contract)
 
-        filter_information_contract = TransformContract(load_information=filter_information)
+            filter_information_contract = TransformContract(load_information=filter_information)
 
-        return filter_information_contract
+            return filter_information_contract
+        except Exception as exception:
+            raise TransformException(exception) from exception
 
     def __filter_information(self, contract):
         raw_information = contract.raw_information

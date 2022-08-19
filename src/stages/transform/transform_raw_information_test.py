@@ -3,7 +3,7 @@
 #
 #  ------------------------------------------------------------------------------
 #  Name: transform_raw_information_test.py
-#  Version: 0.0.1
+#  Version: 0.0.2
 #  Summary: Chess Player Database
 #           A complete implementation of ETL process.
 #
@@ -15,6 +15,8 @@
 
 from datetime import date
 
+from src.exception.transform_exception import TransformException
+
 from .transform_raw_information import TransformRawInformation
 
 from ..contracts.transform_contract import TransformContract
@@ -24,8 +26,7 @@ from ..contracts.mocks.extract_contract import extract_contract_mock
 
 def test_transform():
     transform_raw_information = TransformRawInformation()
-    transformed_data = transform_raw_information.transform(
-        extract_contract_mock)
+    transformed_data = transform_raw_information.transform(extract_contract_mock)
 
     assert isinstance(transformed_data, TransformContract)
     assert isinstance(transformed_data.load_information, list)
@@ -82,3 +83,12 @@ def test_transform_with_empty_raw_information():
     assert isinstance(transformed_data, TransformContract)
     assert isinstance(transformed_data.load_information, list)
     assert len(transformed_data.load_information) == 0
+
+def test_transform_exception():
+
+    transform_raw_information = TransformRawInformation()
+
+    try:
+        transform_raw_information.transform(extract_contract=None)
+    except Exception as error: #pylint: disable=broad-except
+        assert isinstance(error, TransformException)
