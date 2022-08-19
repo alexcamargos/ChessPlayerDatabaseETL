@@ -14,14 +14,17 @@
 #  ------------------------------------------------------------------------------
 
 from ..contracts.extract_contract import ExtractContract
+from ..contracts.transform_contract import TransformContract
 
 
 class TransformRawInformation:
 
-    def transform(self, extract_contract: ExtractContract):
+    def transform(self, extract_contract: ExtractContract) -> TransformContract:
         filter_information = self.__filter_information(extract_contract)
 
-        return filter_information
+        filter_information_contract = TransformContract(load_information=filter_information)
+
+        return filter_information_contract
 
     def __filter_information(self, contract):
         raw_information = contract.raw_information
