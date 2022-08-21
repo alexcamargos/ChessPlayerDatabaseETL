@@ -13,7 +13,7 @@
 #  License: MIT
 #  ------------------------------------------------------------------------------
 
-
+from src.exception.loader_exception import LoadException
 from src.infrastructure.interfaces.database_repository import DatabaseRepositoryInterface
 from ..contracts.transform_contract import TransformContract
 
@@ -24,7 +24,10 @@ class LoadData:
         self.__repository = repository
 
     def load(self, transformed_contract: TransformContract):
-        load_information = transformed_contract.load_information
+        try:
+            load_information = transformed_contract.load_information
 
-        for data in load_information:
-            self.__repository.insert_chess_player(data)
+            for data in load_information:
+                self.__repository.insert_chess_player(data)
+        except Exception as exception:
+            raise LoadException(exception) from exception
