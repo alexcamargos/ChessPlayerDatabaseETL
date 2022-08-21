@@ -57,6 +57,7 @@ class DatabaseConnectionHandler:
             end_year = orm.Optional(int, size=16)
             number_of_games = orm.Optional(int, size=32)
             href = orm.Optional(str, 256)
+            extraction_date = orm.Optional(int, size=32)
 
     def connect(self, provider='sqlite', create_tables=True):
         self.database = orm.Database()
