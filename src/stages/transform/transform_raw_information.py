@@ -86,7 +86,7 @@ class TransformRawInformation:
             start_year = years_covered
             end_year = years_covered
 
-        return {'frist_name': first_name,
+        return {'first_name': first_name,
                 'last_name': last_name,
                 'player_id': int(player_id),
                 'highest_rating': int(highest_rating),

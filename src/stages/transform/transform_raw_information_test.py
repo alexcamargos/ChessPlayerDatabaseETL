@@ -32,7 +32,7 @@ def test_transform():
     assert isinstance(transformed_data.load_information, list)
     assert isinstance(transformed_data.load_information[0], dict)
 
-    assert 'frist_name' in transformed_data.load_information[0]
+    assert 'first_name' in transformed_data.load_information[0]
     assert 'last_name' in transformed_data.load_information[0]
     assert 'player_id' in transformed_data.load_information[0]
     assert 'highest_rating' in transformed_data.load_information[0]
@@ -42,7 +42,7 @@ def test_transform():
     assert 'href' in transformed_data.load_information[0]
     assert 'extraction_date' in transformed_data.load_information[0]
 
-    assert isinstance(transformed_data.load_information[0]['frist_name'], str)
+    assert isinstance(transformed_data.load_information[0]['first_name'], str)
     assert isinstance(transformed_data.load_information[0]['last_name'], str)
     assert isinstance(transformed_data.load_information[0]['player_id'], int)
     assert isinstance(transformed_data.load_information[0]['highest_rating'], int)
@@ -62,7 +62,7 @@ def test_transform_with_now_data():
     assert isinstance(transformed_data.load_information, list)
     assert isinstance(transformed_data.load_information[0], dict)
 
-    assert transformed_data.load_information[0]['frist_name'] == 'Anton'
+    assert transformed_data.load_information[0]['first_name'] == 'Anton'
     assert transformed_data.load_information[0]['last_name'] == 'Aaberg'
     assert transformed_data.load_information[0]['player_id'] == 67200
     assert transformed_data.load_information[0]['highest_rating'] == 2400
