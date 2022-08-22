@@ -34,6 +34,6 @@ class ExtractorHtmlInformation:
             collect_information = self.__collector.collect_information(html_information['content'])
 
             return ExtractContract(raw_information=collect_information,
-                                extraction_date=dt.today())
+                                extraction_date=dt.today().toordinal())
         except Exception as exception:
             raise ExtractException(exception) from exception

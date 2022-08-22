@@ -40,7 +40,7 @@ def test_extract_html_information(requests_mock):
     response = extractor.extract()
 
     assert isinstance(response, ExtractContract)
-    assert isinstance(response.extraction_date, dt)
+    assert isinstance(response.extraction_date, int)
     assert isinstance(response.raw_information, list)
     assert isinstance(response.raw_information[0], dict)
 
@@ -50,7 +50,7 @@ def test_extract_html_information(requests_mock):
     assert 'number_of_games' in response.raw_information[0]
     assert 'href' in response.raw_information[0]
 
-    assert response.extraction_date == dt.today()
+    assert response.extraction_date == dt.today().toordinal()
 
 
 def test_extract_html_information_requester_exception(requests_mock):
