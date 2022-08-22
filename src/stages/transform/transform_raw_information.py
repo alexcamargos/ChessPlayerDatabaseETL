@@ -3,7 +3,7 @@
 #
 #  ------------------------------------------------------------------------------
 #  Name: transform_raw_information.py
-#  Version: 0.0.1
+#  Version: 0.0.2
 #  Summary: Chess Player Database
 #           A complete implementation of ETL process.
 #
@@ -21,11 +21,13 @@ from ..contracts.transform_contract import TransformContract
 
 class TransformRawInformation:
 
-    def transform(self, extract_contract: ExtractContract) -> TransformContract:
+    def transform(self,
+                  extract_contract: ExtractContract) -> TransformContract:
         try:
             filter_information = self.__filter_information(extract_contract)
 
-            filter_information_contract = TransformContract(load_information=filter_information)
+            filter_information_contract = TransformContract(
+                load_information=filter_information)
 
             return filter_information_contract
         except Exception as exception:
@@ -45,11 +47,9 @@ class TransformRawInformation:
             href = information['href']
 
             # Transform single information.
-            transformed_data = self.__transform_information(player_name,
-                                                            highest_rating,
-                                                            years_covered,
-                                                            number_of_games,
-                                                            href)
+            transformed_data = self.__transform_information(
+                player_name, highest_rating, years_covered, number_of_games,
+                href)
             transformed_data['extraction_date'] = extraction_date
 
             # Append transformed information to the list.
@@ -73,6 +73,12 @@ class TransformRawInformation:
             last_name = None
             first_name = player_name.strip().capitalize()
 
+        if ',' in highest_rating:
+            highest_rating = highest_rating.replace(',', '')
+
+        if highest_rating == '':
+            highest_rating = 0
+
         if 'pid' in href:
             player_id = href.split('?pid=')[1]
         else:
@@ -86,11 +92,19 @@ class TransformRawInformation:
             start_year = years_covered
             end_year = years_covered
 
-        return {'first_name': first_name,
-                'last_name': last_name,
-                'player_id': int(player_id),
-                'highest_rating': int(highest_rating),
-                'start_year': int(start_year),
-                'end_year': int(end_year),
-                'number_of_games': int(number_of_games),
-                'href': href}
+        if ',' in number_of_games:
+            number_of_games = number_of_games.replace(',', '')
+
+        if number_of_games == '':
+            number_of_games = 0
+
+        return {
+            'first_name': first_name,
+            'last_name': last_name,
+            'player_id': int(player_id),
+            'highest_rating': int(highest_rating),
+            'start_year': int(start_year),
+            'end_year': int(end_year),
+            'number_of_games': int(number_of_games),
+            'href': href
+        }
