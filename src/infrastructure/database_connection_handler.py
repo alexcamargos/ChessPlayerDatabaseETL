@@ -13,7 +13,17 @@
 #  License: MIT
 #  ------------------------------------------------------------------------------
 
+from os import environ
 from pony import orm
+
+# Database connection information get for environment variables.
+# Database provider db4free.net
+# https://www.db4free.net/phpMyAdmin
+DATABASE = environ.get('DATABASE')                      # Database name.
+DATABASE_HOST = environ.get('DATABASE_HOST')            # Database host.
+DATABASE_PORT = environ.get('DATABASE_PORT')            # Database port.
+DATABASE_USER = environ.get('DATABASE_USER')            # Database user.
+DATABASE_PASSWORD = environ.get('DATABASE_PASSWORD')    # Database password.
 
 
 class DatabaseConnectionHandler:
@@ -22,10 +32,10 @@ class DatabaseConnectionHandler:
                              filename='chess_player_database.sqlite',
                              create_db=True),
               'mysql': dict(provider='mysql',
-                            host="localhost",
-                            user="default",
-                            passwd="default",
-                            db="chess_player_database"),
+                            host=DATABASE_HOST,
+                            user=DATABASE_USER,
+                            passwd=DATABASE_PASSWORD,
+                            db=DATABASE),
               'postgres': dict(provider='postgres',
                                user='default',
                                password='default',
@@ -59,7 +69,7 @@ class DatabaseConnectionHandler:
             href = orm.Optional(str, 256)
             extraction_date = orm.Optional(int, size=32)
 
-    def connect(self, provider='sqlite', create_tables=True):
+    def connect(self, provider='mysql', create_tables=True):
         self.database = orm.Database()
         self.database.bind(**self.params[provider])
         self.__define_entities(self.database)
