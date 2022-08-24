@@ -70,7 +70,7 @@ class TransformRawInformation:
             last_name = names[0].strip().capitalize()
             first_name = names[1].strip().capitalize()
         else:
-            last_name = None
+            last_name = ''
             first_name = player_name.strip().capitalize()
 
         if ',' in highest_rating:
@@ -82,7 +82,7 @@ class TransformRawInformation:
         if 'pid' in href:
             player_id = href.split('?pid=')[1]
         else:
-            player_id = None
+            player_id = ''
 
         if '-' in years_covered:
             years = years_covered.split('-')

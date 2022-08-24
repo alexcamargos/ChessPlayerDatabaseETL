@@ -13,9 +13,16 @@
 #  License: MIT
 #  ------------------------------------------------------------------------------
 
+from time import sleep
 from src.main.main_pipeline import MainPipeline
 
 if __name__ == "__main__":
-    URL = 'https://www.chessgames.com/directory/A.html'
-    pipeline = MainPipeline(url=URL)
-    pipeline.run()
+    # A list with A-Z.
+    alphabet = [chr(i) for i in range(65, 91)]
+
+    for letter in alphabet:
+        URL = f'https://www.chessgames.com/directory/{letter}.html'
+        print(f'Processing {URL}')
+        pipeline = MainPipeline(url=URL)
+        pipeline.run()
+        sleep(10)  # Sleep 10 seconds to avoid too many requests.
