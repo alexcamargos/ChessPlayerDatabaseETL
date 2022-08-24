@@ -21,8 +21,8 @@ class DatabaseRepositoryInterface(ABC):
 
     @abstractmethod
     def insert_chess_player(self, data: Dict) -> None:
-        raise NotImplementedError
+        raise NotImplementedError("You should implement this method.")
 
     @abstractmethod
     def list_all_chess_players(self) -> list:
-        raise NotImplementedError
+        raise NotImplementedError("You should implement this method.")

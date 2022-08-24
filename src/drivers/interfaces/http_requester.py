@@ -23,4 +23,4 @@ class HttpRequesterInterface(ABC):
     def make_request(self):
         """Make request to the url and return the response."""
 
-        raise NotImplementedError
+        raise NotImplementedError("You should implement this method.")

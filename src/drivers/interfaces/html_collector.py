@@ -22,4 +22,4 @@ class HtmlCollectorInterface(ABC):
     def collect_information(self, html: str):
         """Collect information from the html."""
 
-        raise NotImplementedError
+        raise NotImplementedError("You should implement this method.")
