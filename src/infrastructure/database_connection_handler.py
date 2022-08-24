@@ -3,7 +3,7 @@
 #
 #  ------------------------------------------------------------------------------
 #  Name: database_connection_handler.py
-#  Version: 0.0.1
+#  Version: 0.0.2
 #  Summary: database_connection_handler.py
 #           A complete implementation of ETL process.
 #
@@ -16,6 +16,8 @@
 from os import environ
 from pony import orm
 
+from .interfaces.database_connection_handler import DatabaseConnectionHandlerInterface
+
 # Database connection information get for environment variables.
 # Database provider db4free.net
 # https://www.db4free.net/phpMyAdmin
@@ -26,7 +28,7 @@ DATABASE_USER = environ.get('DATABASE_USER')            # Database user.
 DATABASE_PASSWORD = environ.get('DATABASE_PASSWORD')    # Database password.
 
 
-class DatabaseConnectionHandler:
+class DatabaseConnectionHandler(DatabaseConnectionHandlerInterface):
 
     params = {'sqlite': dict(provider='sqlite',
                              filename='chess_player_database.sqlite',
@@ -69,10 +71,12 @@ class DatabaseConnectionHandler:
             href = orm.Optional(str, 256)
             extraction_date = orm.Optional(int, size=32)
 
-    def connect(self, provider='mysql', create_tables=True):
+    def connect(self, provider='sqlite', create_tables=True):
         self.database = orm.Database()
         self.database.bind(**self.params[provider])
         self.__define_entities(self.database)
-        self.database.generate_mapping(create_tables=create_tables)
+
+        if create_tables:
+            self.database.generate_mapping(create_tables=create_tables)
 
         return self.database

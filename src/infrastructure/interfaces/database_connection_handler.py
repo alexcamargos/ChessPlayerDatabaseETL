@@ -2,9 +2,9 @@
 # encoding: utf-8
 #
 #  ------------------------------------------------------------------------------
-#  Name: database_repository.py
-#  Version: 0.0.1
-#  Summary: Chess Player Database
+#  Name: database_connection_handler.py
+#  Version: 0.0.2
+#  Summary: database_connection_handler.py
 #           A complete implementation of ETL process.
 #
 #  Author: Alexsander Lopes Camargos
@@ -14,15 +14,10 @@
 #  ------------------------------------------------------------------------------
 
 from abc import ABC, abstractmethod
-from typing import Dict
 
 
-class DatabaseRepositoryInterface(ABC):
-
-    @abstractmethod
-    def insert_chess_player(self, data: Dict) -> None:
-        raise NotImplementedError("You should implement this method.")
+class DatabaseConnectionHandlerInterface(ABC):
 
     @abstractmethod
-    def list_all_chess_players(self) -> list:
-        raise NotImplementedError("You should implement this method.")
+    def connect(self, provider: str, create_tables: bool) -> None:
+        raise NotImplementedError('You must implement this method')

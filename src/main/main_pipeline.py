@@ -18,6 +18,7 @@ from src.stages.transform.transform_raw_information import TransformRawInformati
 from src.stages.loader.load_data import LoadData as Loader
 from src.drivers.http_requester import HttpRequester
 from src.drivers.html_collector import HtmlCollector
+from src.infrastructure.database_connection_handler import DatabaseConnectionHandler
 from src.infrastructure.database_repository import DatabaseRepository
 
 
@@ -28,7 +29,8 @@ class MainPipeline:
                                      collector=HtmlCollector())
 
         self.__transformer = Transformer()
-        self.__loader = Loader(repository=DatabaseRepository())
+        self.__loader = Loader(repository=DatabaseRepository(
+            connection_handler=DatabaseConnectionHandler()))
 
     def run(self):
         extract_contract = self.__extractor.extract()

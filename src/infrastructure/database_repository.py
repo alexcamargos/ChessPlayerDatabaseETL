@@ -13,15 +13,14 @@
 #  License: MIT
 #  ------------------------------------------------------------------------------
 
-from .database_connection_handler import DatabaseConnectionHandler
 from .interfaces.database_repository import DatabaseRepositoryInterface
 from .chess_player_service import ChessPlayerService
 
 
 class DatabaseRepository(DatabaseRepositoryInterface):
 
-    def __init__(self):
-        self.database = DatabaseConnectionHandler().connect()
+    def __init__(self, connection_handler):
+        self.database = connection_handler.connect(provider='sqlite', create_tables=True)
         self.chess_player_service = ChessPlayerService(self.database)
 
     def insert_chess_player(self, data) -> None:

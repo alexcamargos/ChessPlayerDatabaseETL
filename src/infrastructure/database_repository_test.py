@@ -13,19 +13,20 @@
 #  License: MIT
 #  ------------------------------------------------------------------------------
 
+from .database_connection_handler import DatabaseConnectionHandler
 from .database_repository import DatabaseRepository
 from .mocks.row_test_data import row_test_data
 
+database = DatabaseRepository(connection_handler=DatabaseConnectionHandler())
+
 
 def test_insert_chess_player():
-    database = DatabaseRepository()
 
     for row_data in row_test_data:
         database.insert_chess_player(row_data)
 
 
 def test_list_all_chess_players():
-    database = DatabaseRepository()
 
     all_chess_players = database.list_all_chess_players()
     assert len(all_chess_players) == len(row_test_data)
