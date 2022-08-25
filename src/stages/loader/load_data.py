@@ -14,8 +14,9 @@
 #  ------------------------------------------------------------------------------
 
 from src.exception.loader_exception import LoadException
-from src.infrastructure.interfaces.database_repository import \
-    DatabaseRepositoryInterface
+from src.infrastructure.interfaces.database_repository import (
+    DatabaseRepositoryInterface,
+)
 
 from ..contracts.transform_contract import TransformContract
 

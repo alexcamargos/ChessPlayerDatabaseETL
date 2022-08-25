@@ -1,6 +1,14 @@
 repos:
   - repo: local
     hooks:
+      - id: isort-check
+        name: isort-check 
+        entry: isort src/.
+        language: system
+        types: [python]
+        args: ["--profile", "black"]
+        stages: [commit]
+    hooks:
       - id: pylint
         name: pylint
         entry: pylint
@@ -12,7 +20,6 @@ repos:
             "--rcfile=.pylintrc", # Link to your config file
             "--load-plugins=pylint.extensions.docparams", # Load an extension
           ]
-  - repo: local
     hooks:
       - id: requirements
         name: requirements
@@ -20,11 +27,10 @@ repos:
         language: system
         pass_filenames: false
         stages: [commit]
-  - repo: local
     hooks:
       - id: pytest-check
         name: pytest-check
-        entry: bash -c 'pytest'
+        entry: bash -c 'pytest -sv'
         language: system
         pass_filenames: false
         stages: [commit]
