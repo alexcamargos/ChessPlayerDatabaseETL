@@ -13,13 +13,16 @@
 #  License: MIT
 #  ------------------------------------------------------------------------------
 
-from src.stages.extractor.extractor_html_information import ExtractorHtmlInformation as Extractor
-from src.stages.transform.transform_raw_information import TransformRawInformation as Transformer
-from src.stages.loader.load_data import LoadData as Loader
-from src.drivers.http_requester import HttpRequester
 from src.drivers.html_collector import HtmlCollector
-from src.infrastructure.database_connection_handler import DatabaseConnectionHandler
+from src.drivers.http_requester import HttpRequester
+from src.infrastructure.database_connection_handler import \
+    DatabaseConnectionHandler as ConnectionHandler
 from src.infrastructure.database_repository import DatabaseRepository
+from src.stages.extractor.extractor_html_information import \
+    ExtractorHtmlInformation as Extractor
+from src.stages.loader.load_data import LoadData as Loader
+from src.stages.transform.transform_raw_information import \
+    TransformRawInformation as Transformer
 
 
 class MainPipeline:
@@ -30,7 +33,7 @@ class MainPipeline:
 
         self.__transformer = Transformer()
         self.__loader = Loader(repository=DatabaseRepository(
-            connection_handler=DatabaseConnectionHandler()))
+            connection_handler=ConnectionHandler()))
 
     def run(self):
         extract_contract = self.__extractor.extract()

@@ -14,6 +14,7 @@
 #  ------------------------------------------------------------------------------
 
 from src.exception.loader_exception import LoadException
+
 from ..contracts.mocks.transform_contract import transform_contract_mock
 from .load_data import LoadData
 

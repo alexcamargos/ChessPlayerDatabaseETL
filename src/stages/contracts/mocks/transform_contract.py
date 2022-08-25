@@ -14,6 +14,7 @@
 #  ------------------------------------------------------------------------------
 
 from datetime import date as dt
+
 from ..transform_contract import TransformContract
 
 date_ordinal = dt.today().toordinal()

@@ -15,13 +15,13 @@
 
 from datetime import date as dt
 
-from src.drivers.mocks.http_requester_mock import mock_request_from_page
-from src.drivers.http_requester import HttpRequester
 from src.drivers.html_collector import HtmlCollector
+from src.drivers.http_requester import HttpRequester
+from src.drivers.mocks.http_requester_mock import mock_request_from_page
 from src.exception.extract_exception import ExtractException
 
-from .extractor_html_information import ExtractorHtmlInformation
 from ..contracts.extract_contract import ExtractContract
+from .extractor_html_information import ExtractorHtmlInformation
 
 URL = 'https://www.chessgames.com/directory/A.html'
 

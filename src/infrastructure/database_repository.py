@@ -13,8 +13,8 @@
 #  License: MIT
 #  ------------------------------------------------------------------------------
 
-from .interfaces.database_repository import DatabaseRepositoryInterface
 from .chess_player_service import ChessPlayerService
+from .interfaces.database_repository import DatabaseRepositoryInterface
 
 
 class DatabaseRepository(DatabaseRepositoryInterface):

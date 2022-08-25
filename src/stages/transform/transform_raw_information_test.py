@@ -17,11 +17,10 @@ from datetime import date
 
 from src.exception.transform_exception import TransformException
 
-from .transform_raw_information import TransformRawInformation
-
-from ..contracts.transform_contract import TransformContract
 from ..contracts.extract_contract import ExtractContract
 from ..contracts.mocks.extract_contract import extract_contract_mock
+from ..contracts.transform_contract import TransformContract
+from .transform_raw_information import TransformRawInformation
 
 
 def test_transform():
