@@ -17,7 +17,8 @@ from os import environ
 
 from pony import orm
 
-from .interfaces.database_connection_handler import DatabaseConnectionHandlerInterface
+from .interfaces.database_connection_handler import \
+    DatabaseConnectionHandlerInterface
 
 # Database connection information get for environment variables.
 # Database provider db4free.net

@@ -15,17 +15,14 @@
 
 from src.drivers.html_collector import HtmlCollector
 from src.drivers.http_requester import HttpRequester
-from src.infrastructure.database_connection_handler import (
-    DatabaseConnectionHandler as ConnectionHandler,
-)
+from src.infrastructure.database_connection_handler import \
+    DatabaseConnectionHandler as ConnectionHandler
 from src.infrastructure.database_repository import DatabaseRepository
-from src.stages.extractor.extractor_html_information import (
-    ExtractorHtmlInformation as Extractor,
-)
+from src.stages.extractor.extractor_html_information import \
+    ExtractorHtmlInformation as Extractor
 from src.stages.loader.load_data import LoadData as Loader
-from src.stages.transform.transform_raw_information import (
-    TransformRawInformation as Transformer,
-)
+from src.stages.transform.transform_raw_information import \
+    TransformRawInformation as Transformer
 
 
 class MainPipeline:
