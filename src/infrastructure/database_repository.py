@@ -20,7 +20,7 @@ from .interfaces.database_repository import DatabaseRepositoryInterface
 class DatabaseRepository(DatabaseRepositoryInterface):
 
     def __init__(self, connection_handler):
-        self.database = connection_handler.connect(provider='sqlite', create_tables=True)
+        self.database = connection_handler.connect(provider='postgres', create_tables=True)
         self.chess_player_service = ChessPlayerService(self.database)
 
     def insert_chess_player(self, data) -> None:

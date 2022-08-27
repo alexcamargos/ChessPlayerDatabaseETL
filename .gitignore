@@ -1,5 +1,6 @@
 chess_player_database.sqlite
 db4free_environment.sh
+bit_io_environment.sh
 
 ### Git ###
 # Created by git for backups. To disable backups in Git:

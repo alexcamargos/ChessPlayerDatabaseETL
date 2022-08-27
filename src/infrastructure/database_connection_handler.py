@@ -21,13 +21,13 @@ from .interfaces.database_connection_handler import \
     DatabaseConnectionHandlerInterface
 
 # Database connection information get for environment variables.
-# Database provider db4free.net
-# https://www.db4free.net/phpMyAdmin
-DATABASE = environ.get('DATABASE')                      # Database name.
-DATABASE_HOST = environ.get('DATABASE_HOST')            # Database host.
-DATABASE_PORT = environ.get('DATABASE_PORT')            # Database port.
-DATABASE_USER = environ.get('DATABASE_USER')            # Database user.
-DATABASE_PASSWORD = environ.get('DATABASE_PASSWORD')    # Database password.
+# Database provider bit.io
+# https://bit.io/
+DATABASE = environ.get('DATABASE')                    # Database name.
+DATABASE_HOSTNAME = environ.get('DATABASE_HOSTNAME')  # Database host.
+DATABASE_PORT = environ.get('DATABASE_PORT')          # Database port.
+DATABASE_USERNAME = environ.get('DATABASE_USERNAME')  # Database user.
+DATABASE_PASSWORD = environ.get('DATABASE_PASSWORD')  # Database password.
 
 
 class DatabaseConnectionHandler(DatabaseConnectionHandlerInterface):
@@ -36,15 +36,15 @@ class DatabaseConnectionHandler(DatabaseConnectionHandlerInterface):
                              filename='chess_player_database.sqlite',
                              create_db=True),
               'mysql': dict(provider='mysql',
-                            host=DATABASE_HOST,
-                            user=DATABASE_USER,
+                            host=DATABASE_HOSTNAME,
+                            user=DATABASE_USERNAME,
                             passwd=DATABASE_PASSWORD,
                             db=DATABASE),
               'postgres': dict(provider='postgres',
-                               user='default',
-                               password='default',
-                               host='localhost',
-                               database='chess_player_database'),
+                               user=DATABASE_USERNAME,
+                               password=DATABASE_PASSWORD,
+                               host=DATABASE_HOSTNAME,
+                               database=DATABASE),
               'cockroach': dict(provider='cockroach',
                                 user='default',
                                 host='localhost',

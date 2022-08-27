@@ -18,7 +18,10 @@ packaging==21.3
 platformdirs==2.5.2
 pluggy==1.0.0
 pony==0.7.16
+postgres==4.0
 pre-commit==2.20.0
+psycopg2-binary==2.9.3
+psycopg2-pool==1.1
 py==1.11.0
 pylint==2.14.5
 PyMySQL==1.0.2
